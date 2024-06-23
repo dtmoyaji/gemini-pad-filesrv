@@ -1,0 +1,54 @@
+services:
+  #NEXTCLOUD
+  nc:
+    image: nextcloud:latest
+    environment:
+      - POSTGRES_HOST=db
+      - POSTGRES_DB=gpfsrv
+      - POSTGRES_USER=gpfsrv
+      - POSTGRES_PASSWORD=gpfsrv
+      - NEXTCLOUD_ADMIN_USER=${NEXTCLOUD_USER:-nextcloud_admin}
+      - NEXTCLOUD_ADMIN_PASSWORD=${NEXTCLOUD_PASSWORD:-p@ssw0rd}
+      - NEXTCLOUD_TRUSTED_DOMAINS=127.0.0.1
+    ports:
+      - "8080:80"
+    depends_on:
+      - db
+      - es
+    volumes:
+      - ./entrypoint.sh:/entrypoint.sh
+      - nc_data:/var/www/html
+      - ./opt:/opt
+
+  #posgresql
+  db:
+    image: postgres:latest
+    environment:
+      - POSTGRES_DB=gpfsrv
+      - POSTGRES_USER=gpfsrv
+      - POSTGRES_PASSWORD=gpfsrv
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+  
+  #ELASTICSEARCH
+  es:
+    build:
+      dockerfile: Dockerfile.es
+    environment:
+      discovery.type: single-node
+      xpack.security.enabled: "false"
+      ES_JAVA_OPTS: -Xms1G -Xmx1G
+    volumes:
+      - es_data:/usr/share/elasticsearch/data
+    mem_reservation: 1073741824
+    ports:
+      - "9200:9200"
+      - "9300:9300"
+    tty: true
+
+volumes:
+  nc_data:
+  db_data:
+  es_data:

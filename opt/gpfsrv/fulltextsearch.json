@@ -1,0 +1,30 @@
+{
+    "apps": {
+        "fulltextsearch": {
+            "search_platform": "OCA\\FullTextSearch_ElasticSearch\\Platform\\ElasticSearchPlatform",
+            "app_navigation": "1",
+            "enabled": "yes",
+            "types": ""
+        },
+        "fulltextsearch_elasticsearch": {
+            "analyzer_tokenizer": "kuromoji_tokenizer",
+            "elastic_host": "http://es:9200",
+            "elastic_index": "nextcloud",
+            "enabled": "yes",
+            "types": ""
+        },
+        "fulltextsearch_files":{
+            "files_local": "1",
+            "files_external": "1",
+            "files_group_folders": "1",
+            "files_encrypted": "0",
+            "files_federated": "0",
+            "files_size": "20",
+            "files_pdf": "1",
+            "files_office": "1",
+            "files_image": "0",
+            "files_audio": "0",
+            "files_chunk_size": "2"
+        }
+    }
+}
