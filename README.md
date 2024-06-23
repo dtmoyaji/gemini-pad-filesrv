@@ -2,6 +2,12 @@
 
 # setup
 
+### 0. git clone
+
+```
+git clone https://github.com/dtmoyaji/gemini-pad-filesrv.git .
+```
+
 ### 1. make .env file
 
 include parameter belows and save as .env .
