@@ -35,6 +35,7 @@ services:
   #ELASTICSEARCH
   es:
     build:
+      context: .
       dockerfile: Dockerfile.es
     environment:
       discovery.type: single-node
