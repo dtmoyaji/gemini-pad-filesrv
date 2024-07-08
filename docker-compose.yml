@@ -10,6 +10,7 @@ services:
       - NEXTCLOUD_ADMIN_USER=${NEXTCLOUD_USER:-nextcloud_admin}
       - NEXTCLOUD_ADMIN_PASSWORD=${NEXTCLOUD_PASSWORD:-p@ssw0rd}
       - NEXTCLOUD_TRUSTED_DOMAINS=127.0.0.1
+      - PHP_MEMORY_LIMIT=1024M
     ports:
       - "${NEXTCLOUD_PORT:-8080}:80"
     depends_on:
