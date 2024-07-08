@@ -11,7 +11,7 @@ services:
       - NEXTCLOUD_ADMIN_PASSWORD=${NEXTCLOUD_PASSWORD:-p@ssw0rd}
       - NEXTCLOUD_TRUSTED_DOMAINS=127.0.0.1
     ports:
-      - "${NEXTCLOUD_PORT}:80"
+      - "${NEXTCLOUD_PORT:-8080}:80"
     depends_on:
       - db
       - es
@@ -30,7 +30,7 @@ services:
     volumes:
       - db_data:/var/lib/postgresql/data
     ports:
-      - "${POSTGRES_PORT}:5432"
+      - "${POSTGRES_PORT:-5432}:5432"
   
   #ELASTICSEARCH
   es:
@@ -44,7 +44,7 @@ services:
       - es_data:/usr/share/elasticsearch/data
     mem_reservation: 1073741824
     ports:
-      - "${ELASTIC_PORT}:9200"
+      - "${ELASTIC_PORT:-9200}:9200"
       - "9300:9300"
     tty: true
 
